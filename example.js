@@ -41,4 +41,28 @@ $(function() {
 		$('#details').text('');
 	});
 
+	//CLICK ON A SESSION TO LOAD THE DESCRIPTION
+	$('#content').on('click', '#sessions li a', function(e) {
+		e.preventDefault();
+		var fragment = this.href;
+
+		fragment = fragment.replace('#', ' #');
+		$('#details').load(fragment);
+
+		$('#sessions a.current').removeClass('current');
+		$(this).addClass('current');
+	});
+
+	// CLICK ON PRIMARY NAVIGATION
+	$('nav a').on('click', function(e) {
+		e.preventDefault();
+		var url = this.href;
+
+		$('nav a.current').removeClass('current');
+		$(this).addClass('current');
+
+		$('#container').remove();
+		$('#content').load(url + ' #container').hide().fadeIn('slow');
+	});
+
 });
